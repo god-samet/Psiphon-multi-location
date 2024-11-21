@@ -54,6 +54,9 @@ function uninstall_psiphon() {
 function show_menu() {
     echo -e "${CYAN}======================================${NC}"
     echo -e "${GREEN}        Psiphon Management Script      ${NC}"
+    echo -e "${YELLOW}    Management bay samet               ${NC}"
+     echo -e "${YELLOW}    Management bay samet               ${NC}"
+     echo -e "${YELLOW}    telgram id :   @hoot0ke            ${NC}"
     echo -e "${CYAN}======================================${NC}"
     
     # Psiphon status check
