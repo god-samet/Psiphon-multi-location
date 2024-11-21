@@ -176,7 +176,6 @@ function add_instance() {
         read user_input
         if [[ -z $user_input ]]; then
             echo -e "${CYAN}Adding new instance...${NC}"
-            continue
         elif [[ "$user_input" == "exit" ]]; then
             echo -e "${CYAN}Exiting...${NC}"
             break
