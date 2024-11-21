@@ -134,16 +134,16 @@ function add_instance() {
         validate_ip $local_ip || return
 
         # Check if Psiphon is running
-        if ! ps aux | grep -q '[p]siphon3'; then
+        if ! pgrep -x "psiphon3" > /dev/null; then
             echo -e "${RED}Psiphon is not running. Please start Psiphon first.${NC}"
             return
         fi
 
         # Check if Psiphon configuration file exists
         if [[ ! -f "$PSIPHON_DIR/psiphon3.conf" ]]; then
-            echo -e "${RED}Psiphon configuration file not found: $PSIPHON_DIR/psiphon3.conf${NC}"
-            echo "$(date) - Error: Psiphon configuration file not found." >> $LOG_FILE
-            return
+            echo -e "${YELLOW}Configuration file not found. Creating a new one...${NC}"
+            sudo touch "$PSIPHON_DIR/psiphon3.conf"
+            sudo chmod 644 "$PSIPHON_DIR/psiphon3.conf"
         fi
 
         # Add configuration directly to Psiphon config file
