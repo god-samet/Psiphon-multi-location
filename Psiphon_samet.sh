@@ -6,7 +6,7 @@ YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 WHITE='\033[1;37m'
 RED='\033[0;31m'
-NC='\033[0m  # Reset color
+NC='\033[0m' # Reset color
 
 # Paths
 LOG_FILE="/var/log/psiphon_instance.log"  # Log file path
@@ -102,7 +102,6 @@ function validate_ip() {
     return 0
 }
 
-# Function to add new Psiphon instance with proper port settings
 function add_instance() {
     while true; do
         echo -e "${YELLOW}Enter country code (e.g., fr, it, tr):${NC}"
@@ -110,7 +109,7 @@ function add_instance() {
 
         # Convert country code to uppercase and validate
         country_code=$(echo "$country_code" | tr '[:lower:]' '[:upper:]')
-        validate_country_code $country_code || return
+        validate_country_code "$country_code" || return
 
         # Starting port number (for example 1080)
         starting_port=1080
@@ -131,19 +130,19 @@ function add_instance() {
         local_ip=${local_ip:-127.0.0.1}  # Default to 127.0.0.1 if not provided
 
         # Validate IP
-        validate_ip $local_ip || return
+        validate_ip "$local_ip" || return
 
         # Check if Psiphon is running
-        if ! pgrep -x "psiphon3" > /dev/null; then
+        if ! ps aux | grep -q '[p]siphon3'; then
             echo -e "${RED}Psiphon is not running. Please start Psiphon first.${NC}"
             return
         fi
 
         # Check if Psiphon configuration file exists
         if [[ ! -f "$PSIPHON_DIR/psiphon3.conf" ]]; then
-            echo -e "${YELLOW}Configuration file not found. Creating a new one...${NC}"
-            sudo touch "$PSIPHON_DIR/psiphon3.conf"
-            sudo chmod 644 "$PSIPHON_DIR/psiphon3.conf"
+            echo -e "${RED}Psiphon configuration file not found: $PSIPHON_DIR/psiphon3.conf${NC}"
+            echo "$(date) - Error: Psiphon configuration file not found." >> $LOG_FILE
+            return
         fi
 
         # Add configuration directly to Psiphon config file
@@ -182,7 +181,6 @@ function add_instance() {
         fi
     done
 }
-
 # Function to get real IP for a country using an external API
 function get_country_ip() {
     local country_code=$1
