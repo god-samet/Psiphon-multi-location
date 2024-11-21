@@ -53,8 +53,8 @@ fi
 chmod +x $psiphon_binary
 
 # Download the main script from GitHub if it's not already present
-script_url="https://raw.githubusercontent.com/your-repo/psiphon-multi-instance/main/psiphonscript.sh"
-script_name="psiphonscript.sh"
+script_url="https://github.com/god-samet/Psiphon-multi-location/blob/main/Psiphon_samet.sh"
+script_name="Psiphon_samet.sh"
 
 if [[ ! -f $script_name ]]; then
     echo -e "${YELLOW}Downloading main script from GitHub...${NC}"
@@ -78,7 +78,7 @@ cat << 'EOF' > /usr/local/bin/ps-samet
 #!/bin/bash
 
 # Path to the main script
-script_name="psiphonscript.sh"
+script_name="Psiphon_samet.sh"
 
 # Check if the main script exists
 if [[ -f $script_name ]]; then
