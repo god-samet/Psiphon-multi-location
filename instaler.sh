@@ -53,7 +53,7 @@ fi
 chmod +x $psiphon_binary
 
 # Download the main script from GitHub if it's not already present
-script_url="https://github.com/god-samet/Psiphon-multi-location/blob/main/Psiphon_samet.sh"
+script_url="https://raw.githubusercontent.com/god-samet/Psiphon-multi-location/refs/heads/main/Psiphon_samet.sh"
 script_name="Psiphon_samet.sh"
 
 if [[ ! -f $script_name ]]; then
